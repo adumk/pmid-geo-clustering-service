@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Visualization of corresponding dataset clusters based on tf-idf vectors</h1>
+        <a href="/">Back</a>
+
+        {% if plot_html %}
+            <div class="plot-container">
+                {{ plot_html|safe }}
+            </div>
+        {% else %}
+            <p class="error">No data to visualize</p>
+        {% endif %}
+
+        <h2>Associations between datasets and PMIDs</h2>
+        <div class="associations">
+            {% for pmid, gse_ids in pmid_to_gse.items() %}
+                <div class="association">
+                    <strong>PMID {{ pmid }}:</strong>
+                    {% if gse_ids %}
+                        {{ gse_ids|join(', ') }}
+                    {% else %}
+                        <span class="no-data">No related GSE</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <h2>Datasets details</h2>
+            <table>
+    <thead>
+        <tr>
+            <th style="width: 10%">GSE ID</th>
+            <th style="width: 10%">PMID</th>
+            <th style="width: 5%">Cluster</th>
+            <th style="width: 60%">Title</th>
+            <th style="width: 15%">Organism</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in df %}
+        <tr>
+            <td>{{ row.gse_id }}</td>
+            <td>{{ row.pmid }}</td>
+            <td>{{ row.cluster }}</td>
+            <td>{{ row.Title }}</td>
+            <td>{{ row.Organism }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    </div>
+</body>
+</html>

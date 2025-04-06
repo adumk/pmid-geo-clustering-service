@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GEO Dataset Clustering</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>GEO Datasets Analysis</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="pmids">Insert PMIDs (separate them by commas):</label>
+                <textarea
+                    id="pmids"
+                    name="pmids"
+                    rows="5"
+                    placeholder="25404168, 12345678, ..."></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
